@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Toko Buku</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: burlywood;
+        }
+
+        header {
+            background-color: rgb(94, 79, 60);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: rgb(241, 213, 178);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        h2 {
+            color: rgb(89, 67, 37);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: rgb(68, 60, 45);
+            color: white;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: rgb(202, 178, 133);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #263747;
+        }
+
+        footer {
+            background-color: rgb(81, 65, 43);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1> TOKO BUKU CIMA 📖</h1>
+        <p>Temukan Buku Favoritmu di Sini</p>
+    </header>
+
+    <nav>
+        <a href="#beranda">Beranda</a>
+        <a href="#daftar">Daftar Buku</a>
+        <a href="#pembelian">Pembelian</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- TABEL DAFTAR BUKU -->
+        <div class="content" id="daftar">
+            <h2>Daftar Buku</h2>
+
+            <table>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Buku</th>
+                    <th>Harga</th>
+                    <th>Stok</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>3726 MDPL ⛰️</td>
+                    <td>Rp88.000</td>
+                    <td id="stok1">10</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Perjalanan ke Selatan</td>
+                    <td>Rp75.000</td>
+                    <td id="stok2">8</td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Cantik Itu Luka</td>
+                    <td>Rp110.000</td>
+                    <td id="stok3">12</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>Pulang ke Rahim Bumi</td>
+                    <td>Rp80.000</td>
+                    <td id="stok4">20</td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>The Song of Achilles (Nyanyian Achilles)</td>
+                    <td>Rp110.000</td>
+                    <td id="stok4">3</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- FORM PEMBELIAN -->
+        <div class="content" id="pembelian">
+            <h2>Form Pembelian Buku</h2>
+
+            <form id="formPembelian">
+
+                <label>Nama Pembeli</label>
+                <input type="text" id="nama" placeholder="Masukkan nama pembeli" required>
+
+                <label>Pilih Buku</label>
+                <select id="buku">
+                    <option value="1">3726 MDPL</option>
+                    <option value="2">Perjalanan ke Selatan</option>
+                    <option value="3">Cantik Itu Luka</option>
+                    <option value="4">Pulang ke Rahim Bumi</option>
+                    <option value="5">The Song of Achilles (Nyanyian Achilles) </option>
+                </select>
+
+                <label>Jumlah Buku</label>
+                <input type="number" id="jumlah" min="1" placeholder="Masukkan jumlah" required>
+
+                <button type="submit">Beli Buku</button>
+
+            </form>
+        </div>
+
+    </div>
+
+    <!-- TABEL TRANSAKSI -->
+    <div class="content" style="margin: 20px;">
+        <h2>Data Pembelian</h2>
+
+        <table id="tabelTransaksi">
+            <tr>
+                <th>No</th>
+                <th>Nama Pembeli</th>
+                <th>Nama Buku</th>
+                <th>Jumlah</th>
+                <th>Total Harga</th>
+            </tr>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Toko Buku Cerdas</p>
+    </footer>
+
+    <script>
+        let nomor = 1;
+
+        const dataBuku = {
+            1: {
+                nama: "3726 MDPL",
+                harga: 88000,
+                stok: 10
+            },
+            2: {
+                nama: "Perjalanan ke Selatan",
+                harga: 75000,
+                stok: 8
+            },
+            3: {
+                nama: "Cantik Itu Luka ",
+                harga: 110000,
+                stok: 12
+            },
+            4: {
+                nama: "Pulang ke Rahim Bumi",
+                harga: 80000,
+                stok: 20
+            },
+            5: {
+                nama: "The Song of Achilles (Nyanyian Achilles)",
+                harga: 110000,
+                stok: 3
+            }
+            
+        };
+
+        document.getElementById("formPembelian")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            let nama = document.getElementById("nama").value;
+            let buku = document.getElementById("buku").value;
+            let jumlah = Number(document.getElementById("jumlah").value);
+
+            let pilihan = dataBuku[buku];
+
+            if (jumlah > pilihan.stok) {
+                alert("Stok buku tidak mencukupi!");
+                return;
+            }
+
+            let total = pilihan.harga * jumlah;
+
+            pilihan.stok -= jumlah;
+
+            document.getElementById("stok" + buku).innerText =
+                pilihan.stok;
+
+            let tabel = document.getElementById("tabelTransaksi");
+
+            let baris = tabel.insertRow();
+
+            baris.innerHTML = `
+                <td>${nomor++}</td>
+                <td>${nama}</td>
+                <td>${pilihan.nama}</td>
+                <td>${jumlah}</td>
+                <td>Rp${total.toLocaleString("id-ID")}</td>
+            `;
+
+            alert("Pembelian berhasil!");
+
+            document.getElementById("formPembelian").reset();
+
+        });
+    </script>
+
+</body>
+</html>
